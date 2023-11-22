@@ -6,13 +6,13 @@ const theme = extendTheme({
     light: {
       palette: {
         primary: teal,
-        secondary: deepOrange
+        secondary: cyan
       }
     },
     dark: {
       palette: {
-        primary: cyan,
-        secondary: orange
+        primary: orange,
+        secondary: deepOrange
       }
     }
   }
