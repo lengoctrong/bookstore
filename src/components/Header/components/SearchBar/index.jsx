@@ -9,7 +9,7 @@ import {
   Tooltip
 } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { getAllBooks } from '../../../../redux/apiRequest'
 
@@ -17,7 +17,9 @@ const SearchBar = () => {
   const [bookName, setBookName] = useState()
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const count = useSelector((state) => state.counter.count)
+
+  const handleSearchClick = () => {
     getAllBooks(dispatch, bookName)
   }
 
@@ -68,7 +70,10 @@ const SearchBar = () => {
                 color: 'white'
               }}
             >
-              <SearchIcon style={{ cursor: 'pointer' }} onClick={handleClick} />
+              <SearchIcon
+                style={{ cursor: 'pointer' }}
+                onClick={handleSearchClick}
+              />
             </Box>
           </Box>
         </div>
@@ -82,10 +87,12 @@ const SearchBar = () => {
             }}
           >
             <Button>
-              Cart
-              <Badge badgeContent={4} color="primary">
-                <ShoppingCartIcon color="action" />
-              </Badge>
+              <NavLink to="/cart">
+                Cart
+                <Badge badgeContent={count} color="primary">
+                  <ShoppingCartIcon color="action" />
+                </Badge>
+              </NavLink>
             </Button>
           </Box>
         </div>

@@ -8,15 +8,20 @@ import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-
-function BookItem({ volumeInfo, saleInfo }) {
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCard } from '../../redux/apiRequest'
+function BookItem({ id, volumeInfo, saleInfo }) {
+  const dispatch = useDispatch()
+  const cartBooks = useSelector((state) => state.cart.books)
   const { title, subtitle, authors, description, publisher, publishedDate } =
     volumeInfo
   const amount = saleInfo.listPrice && saleInfo.listPrice.amount
 
   const currencyCode = saleInfo.listPrice && saleInfo.listPrice.currencyCode
 
-  const handleClick = () => {}
+  const handleAddClick = () => {
+    addToCard(cartBooks, dispatch, id)
+  }
 
   return (
     <Card sx={{ width: '300px', display: 'flex', flexDirection: 'column' }}>
@@ -42,7 +47,7 @@ function BookItem({ volumeInfo, saleInfo }) {
       </CardContent>
 
       <CardActions disableSpacing>
-        <IconButton onClick={handleClick} aria-label="add">
+        <IconButton onClick={handleAddClick} aria-label="add">
           <ShoppingCartIcon />
         </IconButton>
         <Box sx={{ flexGrow: 1 }}></Box>
