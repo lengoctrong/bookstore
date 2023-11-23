@@ -14,7 +14,7 @@ import { NavLink } from 'react-router-dom'
 import { getAllBooks } from '../../../../redux/apiRequest'
 
 const SearchBar = () => {
-  const [bookName, setBookName] = useState()
+  const [bookName, setBookName] = useState('')
   const dispatch = useDispatch()
 
   const count = useSelector((state) => state.cart.totalQuantity)

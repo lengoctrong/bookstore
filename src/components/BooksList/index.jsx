@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
-
-const BooksList = ({ children }) => {
+import BookItem from '../BookItem'
+const BooksList = ({ books }) => {
   return (
     <div className="books-list">
       <Box
@@ -12,7 +12,13 @@ const BooksList = ({ children }) => {
           padding: 5
         }}
       >
-        {children}
+        {books.map((book) => {
+          return (
+            <>
+              <BookItem key={book.id} book={book} />
+            </>
+          )
+        })}
       </Box>
     </div>
   )

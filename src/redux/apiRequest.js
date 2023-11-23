@@ -14,7 +14,7 @@ export const getAllBooks = async (dispatch, searchValue) => {
   }
 }
 
-export const addToCard = async (selector, dispatch, id) => {
+export const addToCard = async (dispatch, id) => {
   try {
     const res = await axios.get(`/volumes/${id}`)
     dispatch(addItem(res.data))
