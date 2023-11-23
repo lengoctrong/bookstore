@@ -11,17 +11,17 @@ import {
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { getAllBooks } from '../../../../redux/apiRequest'
+import { getItems } from '../../../../redux/apiRequest'
 import ModeToggle from '../ModeToggle'
 
 const SearchBar = () => {
-  const [bookName, setBookName] = useState('')
+  const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
 
   const count = useSelector((state) => state.cart.totalQuantity)
 
   const handleSearchClick = () => {
-    getAllBooks(dispatch, bookName)
+    getItems(dispatch, searchValue)
   }
 
   return (
@@ -51,9 +51,9 @@ const SearchBar = () => {
             }}
           >
             <TextField
-              value={bookName}
+              value={searchValue}
               onChange={(e) => {
-                setBookName(e.target.value)
+                setSearchValue(e.target.value)
               }}
               fullWidth
               placeholder="What books do you want to search for?"
