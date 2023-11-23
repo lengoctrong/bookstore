@@ -17,7 +17,7 @@ const SearchBar = () => {
   const [bookName, setBookName] = useState()
   const dispatch = useDispatch()
 
-  const count = useSelector((state) => state.counter.count)
+  const count = useSelector((state) => state.cart.totalQuantity)
 
   const handleSearchClick = () => {
     getAllBooks(dispatch, bookName)

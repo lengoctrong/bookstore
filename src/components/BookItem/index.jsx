@@ -12,9 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addToCard } from '../../redux/apiRequest'
 function BookItem({ id, volumeInfo, saleInfo }) {
   const dispatch = useDispatch()
-  const cartBooks = useSelector((state) => state.cart.books)
-  const { title, subtitle, authors, description, publisher, publishedDate } =
-    volumeInfo
+  const cartBooks = useSelector((state) => state.cart.cartItems)
+  const { title, subtitle, publisher, publishedDate } = volumeInfo
   const amount = saleInfo.listPrice && saleInfo.listPrice.amount
 
   const currencyCode = saleInfo.listPrice && saleInfo.listPrice.currencyCode

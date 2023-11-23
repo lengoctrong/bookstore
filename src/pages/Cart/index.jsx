@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux'
 import BookItem from '../../components/BookItem'
 import BooksList from '../../components/BooksList'
 const Cart = () => {
-  const books = useSelector((state) => state.cart.books)
+  const books = useSelector((state) => state.cart.cartItems)
+  console.log(books)
   return (
     <BooksList>
       {books.map((book) => {
