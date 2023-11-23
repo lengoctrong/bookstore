@@ -10,38 +10,39 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCard } from '../../redux/apiRequest'
-function BookItem({ id, volumeInfo, saleInfo }) {
-  const dispatch = useDispatch()
-  const cartBooks = useSelector((state) => state.cart.cartItems)
-  const { title, subtitle, publisher, publishedDate } = volumeInfo
-  const amount = saleInfo.listPrice && saleInfo.listPrice.amount
 
-  const currencyCode = saleInfo.listPrice && saleInfo.listPrice.currencyCode
+function BookItem({ book }) {
+  const dispatch = useDispatch()
+
+  const { volumeInfo, saleInfo } = book
+
+  const { listPrice } = saleInfo
 
   const handleAddClick = () => {
-    addToCard(cartBooks, dispatch, id)
+    addToCard(dispatch, book.id)
   }
 
   return (
     <Card sx={{ width: '300px', display: 'flex', flexDirection: 'column' }}>
-      <CardHeader title={title} subheader={subtitle} />
+      <CardHeader
+        title={volumeInfo && volumeInfo.title}
+        subheader={volumeInfo && volumeInfo.subtitle}
+      />
       <CardMedia
         component="img"
         src={volumeInfo.imageLinks && volumeInfo.imageLinks.thumbnail}
-        alt={title}
+        alt={book.title}
         style={{ width: '200px', margin: 'auto' }}
       />
       <CardContent>
-        <Typography>Date: {publishedDate}</Typography>
-        <Typography>Published by: {publisher}</Typography>
+        <Typography>Date: {volumeInfo.publishedDate}</Typography>
+        <Typography>Published by: {volumeInfo.publisher}</Typography>
         <Typography variant="body2" color="text.secondary">
-          {amount && currencyCode ? (
-            <p>
-              Price: {amount} {currencyCode}
-            </p>
-          ) : (
-            'Price: 250000 VND'
-          )}
+          {listPrice &&
+          saleInfo.listPrice.amount &&
+          saleInfo.listPrice.currencyCode
+            ? `Price: ${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`
+            : 'Price: 250000 VND'}
         </Typography>
       </CardContent>
 

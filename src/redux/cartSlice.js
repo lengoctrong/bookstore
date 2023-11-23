@@ -29,12 +29,17 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       const newItem = action.payload
 
+      console.log(newItem)
+
       state.cartItems.push({
         id: newItem.id,
-        title: newItem.title,
-        subtitle: newItem.subtitle,
-        thumbnail: newItem.thumbnail,
-        price: newItem.price
+        volumeInfo: newItem.volumeInfo,
+        saleInfo: newItem.saleInfo,
+        title: newItem.volumeInfo.title,
+        subtitle: newItem.volumeInfo.subtitle,
+        thumbnail: newItem.volumeInfo.imageLinks.thumbnail,
+        amount: newItem.saleInfo.listPrice?.amount,
+        currencyCode: newItem.saleInfo.listPrice?.currencyCode
       })
 
       state.totalQuantity++
