@@ -17,6 +17,7 @@ const Home = () => {
             <>
               <BookItem
                 key={book.id}
+                id={book.id}
                 volumeInfo={book.volumeInfo}
                 saleInfo={book.saleInfo}
               />
