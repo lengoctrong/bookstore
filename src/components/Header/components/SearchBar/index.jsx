@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { getAllBooks } from '../../../../redux/apiRequest'
+import ModeToggle from '../ModeToggle'
 
 const SearchBar = () => {
   const [bookName, setBookName] = useState('')
@@ -94,6 +95,7 @@ const SearchBar = () => {
                 </Badge>
               </NavLink>
             </Button>
+            <ModeToggle />
           </Box>
         </div>
       </Box>

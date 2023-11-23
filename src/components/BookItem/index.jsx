@@ -49,10 +49,12 @@ function BookItem({ book }) {
       <CardActions disableSpacing>
         <IconButton onClick={handleAddClick} aria-label="add">
           <ShoppingCartIcon />
+          <Typography>Add to cart</Typography>
         </IconButton>
         <Box sx={{ flexGrow: 1 }}></Box>
         <IconButton aria-label="more">
           <InfoIcon />
+          <Typography>Detail</Typography>
         </IconButton>
       </CardActions>
     </Card>

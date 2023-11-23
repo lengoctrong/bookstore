@@ -17,6 +17,7 @@ const totalAmount =
 
 const initialState = {
   cartItems: cartItems,
+  hasItem: false,
   totalQuantity: totalQuantity,
   totalAmount: totalAmount
 }
@@ -29,8 +30,6 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       const newItem = action.payload
 
-      console.log(newItem)
-
       state.cartItems.push({
         id: newItem.id,
         volumeInfo: newItem.volumeInfo,
@@ -41,7 +40,7 @@ const cartSlice = createSlice({
         amount: newItem.saleInfo.listPrice?.amount,
         currencyCode: newItem.saleInfo.listPrice?.currencyCode
       })
-
+      state.hasItem = true
       state.totalQuantity++
 
       localStorage.setItem(

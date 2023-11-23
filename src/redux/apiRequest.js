@@ -5,7 +5,7 @@ import { addItem } from './cartSlice'
 export const getAllBooks = async (dispatch, searchValue) => {
   try {
     const res = await axios.get(
-      `/volumes?q=${searchValue}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
+      `/volumes?q=${searchValue}&startIndex=0&maxResults=10&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
     )
 
     dispatch(getAll(res.data.items))
