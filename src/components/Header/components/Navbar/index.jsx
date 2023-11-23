@@ -10,7 +10,7 @@ const Navbar = () => {
         alignItems: 'center',
         justifyContent: 'space-around',
         height: (theme) => theme.bookstore.navBarHeight,
-        backgroundColor: '#232323',
+        backgroundColor: '#292d3e',
         color: 'white'
       }}
     >

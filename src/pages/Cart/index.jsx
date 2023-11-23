@@ -10,7 +10,9 @@ const Cart = () => {
     <>
       <div className="cart-container">
         <BooksList books={cartItems}></BooksList>
-        <div className="cart-footer">{hasItem && <Pagination />}</div>
+        <div className="cart-footer">
+          {hasItem && <Pagination size="large" />}
+        </div>
       </div>
     </>
   )
