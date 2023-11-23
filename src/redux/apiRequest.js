@@ -5,22 +5,17 @@ import { addItem } from './cartSlice'
 export const getItems = async (
   dispatch,
   searchValue,
-  isPaginate = false,
-  totalItems,
-  maxResults = 10
+  currentPage = 1,
+  totalItems = 1
 ) => {
-  let startIndex = 0
-
-  if (isPaginate) {
-    let currentPage = 1
-    const totalPages = Math.ceil(totalItems / maxResults)
-    currentPage = Math.max(1, Math.min(currentPage, totalPages))
-    startIndex = (currentPage - 1) * maxResults
-  }
+  const limit = 10
+  const totalPages = Math.ceil(totalItems / limit)
+  currentPage = Math.max(1, Math.min(currentPage, totalPages))
+  let offset = (currentPage - 1) * limit
 
   try {
     const res = await axios.get(
-      `/volumes?q=${searchValue}&${startIndex}&${maxResults}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
+      `/volumes?q=${searchValue}&startIndex=${offset}&maxResults=${limit}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
     )
 
     dispatch(getAllBooks(res.data))

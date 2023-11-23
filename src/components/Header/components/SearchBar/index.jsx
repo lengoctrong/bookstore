@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { getItems } from '../../../../redux/apiRequest'
+import { getSearchValue } from '../../../../redux/searchSlice'
 import ModeToggle from '../ModeToggle'
 
 const SearchBar = () => {
@@ -21,6 +22,7 @@ const SearchBar = () => {
   const count = useSelector((state) => state.cart.totalQuantity)
 
   const handleSearchClick = () => {
+    dispatch(getSearchValue(searchValue))
     getItems(dispatch, searchValue)
   }
 

@@ -10,7 +10,10 @@ const theme = extendTheme({
     light: {
       palette: {
         primary: teal,
-        secondary: cyan
+        secondary: cyan,
+        background: {
+          default: '#eaeded'
+        }
       }
     },
     dark: {
