@@ -17,11 +17,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />
       },
-      // cart
-      {
-        path: '/cart',
-        element: <Cart />
-      },
       // detail
       {
         path: '/detail',
@@ -33,6 +28,11 @@ const router = createBrowserRouter([
         element: <Shop />
       }
     ]
+  },
+  // cart
+  {
+    path: '/cart',
+    element: <Cart />
   },
   // login
   {
