@@ -1,13 +1,10 @@
-import { Pagination } from '@mui/material'
 import { useSelector } from 'react-redux'
 // import BooksList from '../../components/BooksList'
 import CartContainer from './CartContainer'
 const Cart = () => {
-  const cart = useSelector((state) => state.cart)
+  const cartItems = useSelector((state) => state.cart.cartItems)
 
-  const { cartItems, hasItem } = cart
-
-  return <CartContainer></CartContainer>
+  return <CartContainer cartItems={cartItems}></CartContainer>
 }
 
 export default Cart
