@@ -10,3 +10,12 @@ li {
   list-style: none;
   text-decoration: none;
 }
+
+/* Navbar */
+.navigation a {
+  color: white;
+}
+
+.navigation a.active {
+  color: rgb(255, 255, 0);
+}

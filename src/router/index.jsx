@@ -3,8 +3,10 @@ import { createBrowserRouter } from 'react-router-dom'
 import Login from '../pages/Auth/Login'
 import Signup from '../pages/Auth/Signup'
 import Cart from '../pages/Cart'
+import Detail from '../pages/Detail'
 import Home from '../pages/Home'
 import Layout from '../pages/Layout'
+import Shop from '../pages/Shop'
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,16 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />
+      },
+      // detail
+      {
+        path: '/detail',
+        element: <Detail />
+      },
+      // shop
+      {
+        path: '/shop',
+        element: <Shop />
       }
     ]
   },

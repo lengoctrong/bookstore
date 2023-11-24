@@ -89,14 +89,14 @@ const SearchBar = () => {
               alignItems: 'center'
             }}
           >
-            <Button>
-              <NavLink to="/cart">
+            <NavLink to="/cart">
+              <Button>
                 Cart
                 <Badge badgeContent={count} color="primary">
                   <ShoppingCartIcon color="action" />
                 </Badge>
-              </NavLink>
-            </Button>
+              </Button>
+            </NavLink>
             <ModeToggle />
           </Box>
         </div>

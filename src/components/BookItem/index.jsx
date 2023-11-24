@@ -8,7 +8,8 @@ import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import { addToCard } from '../../redux/apiRequest'
 
 function BookItem({ book }) {
@@ -52,9 +53,11 @@ function BookItem({ book }) {
           <Typography>Add to cart</Typography>
         </IconButton>
         <Box sx={{ flexGrow: 1 }}></Box>
-        <IconButton aria-label="more">
+        <IconButton aria-label="info">
           <InfoIcon />
-          <Typography>Detail</Typography>
+          <NavLink to="/detail">
+            <Typography>Detail</Typography>
+          </NavLink>
         </IconButton>
       </CardActions>
     </Card>

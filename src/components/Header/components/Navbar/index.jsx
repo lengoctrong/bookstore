@@ -1,6 +1,5 @@
 import { Box } from '@mui/material'
 import { NavLink } from 'react-router-dom'
-import './Navbar.css'
 
 const Navbar = () => {
   return (
@@ -17,7 +16,9 @@ const Navbar = () => {
       <div></div>
       <nav className="navigation">
         <Box sx={{ display: 'flex', gap: 5 }}>
-          <NavLink to="/">Home</NavLink>
+          <NavLink className="active" to="/">
+            Home
+          </NavLink>
           <NavLink to="/shop">Shop</NavLink>
           <NavLink to="/news">News</NavLink>
           <NavLink to="/about">About</NavLink>
