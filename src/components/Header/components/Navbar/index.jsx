@@ -16,9 +16,7 @@ const Navbar = () => {
       <div></div>
       <nav className="navigation">
         <Box sx={{ display: 'flex', gap: 5 }}>
-          <NavLink className="active" to="/">
-            Home
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
           <NavLink to="/shop">Shop</NavLink>
           <NavLink to="/news">News</NavLink>
           <NavLink to="/about">About</NavLink>

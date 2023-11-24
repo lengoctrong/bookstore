@@ -1,8 +1,8 @@
 import { Box, Pagination } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import BooksList from '../../components/BooksList'
-import { getItems } from '../../redux/apiRequest'
+import { getAllItems, getItems } from '../../redux/apiRequest'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -13,6 +13,10 @@ const Home = () => {
 
   const dispatch = useDispatch()
   const searchValue = useSelector((state) => state.search.searchValue)
+
+  useEffect(() => {
+    getAllItems(dispatch, 'pokemon', currentPage)
+  }, [currentPage])
 
   const handlePageChange = (e, newPage) => {
     setCurrentPage(newPage)

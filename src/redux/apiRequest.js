@@ -32,3 +32,32 @@ export const addToCard = async (dispatch, id) => {
     console.log(error)
   }
 }
+
+export const getAllItems = async (dispatch, searchValue = '', currentPage) => {
+  let offset = 0
+  let limit = 5
+
+  if (!searchValue) {
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    const charactersLength = characters.length
+    for (let i = 0; i < length; i++) {
+      searchValue += characters.charAt(
+        Math.floor(Math.random() * charactersLength)
+      )
+    }
+  }
+
+  if (currentPage > 1) {
+    offset = (currentPage - 1) * limit
+  }
+  try {
+    const res = await axios.get(
+      `/volumes?q=${searchValue}&startIndex=${offset}&maxResults=${limit}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
+    )
+
+    dispatch(getAllBooks(res.data))
+  } catch (error) {
+    console.log(error)
+  }
+}
