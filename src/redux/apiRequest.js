@@ -35,7 +35,7 @@ export const addToCard = async (dispatch, id) => {
 
 export const getAllItems = async (dispatch, searchValue = '', currentPage) => {
   let offset = 0
-  let limit = 5
+  let limit = 6
 
   if (!searchValue) {
     const characters =
