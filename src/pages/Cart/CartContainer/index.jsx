@@ -1,4 +1,10 @@
+import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
+import RemoveIcon from '@mui/icons-material/Remove'
 import {
+  Box,
+  Button,
+  ButtonGroup,
   Container,
   Table,
   TableBody,
@@ -8,38 +14,23 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
+import { useDispatch } from 'react-redux'
 import SearchBar from '../../../components/Header/components/SearchBar'
+import { deleteCartItem } from '../../../redux/apiRequest'
 
-const createData = (item, price, quantity, total) => ({
-  item,
-  price,
-  quantity,
-  total
-})
+const CartContainer = ({ cartItems, totalQuantity }) => {
+  const dispatch = useDispatch()
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32),
-  createData('Frozen yoghurt', 159, 6.0, 24, 32)
-]
+  const handleDelete = (id) => {
+    deleteCartItem(dispatch, id)
+  }
 
-const CartContainer = () => {
   return (
     <div className="cart-container">
       <SearchBar />
       <div className="cart-title">
         <Typography variant="h3" sx={{ textAlign: 'center', my: 5 }}>
-          Your Cart (4 items)
+          Your Cart ( {totalQuantity} items)
         </Typography>
       </div>
       <div className="cart-content">
@@ -49,23 +40,57 @@ const CartContainer = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Item</TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <TableCell align="right">Quantity(g)</TableCell>
-                  <TableCell align="right">Total(g)</TableCell>
+                  <TableCell align="center">Price</TableCell>
+                  <TableCell align="center">Quantity</TableCell>
+                  <TableCell align="center">Total</TableCell>
+                  <TableCell align="right">Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {cartItems.map((item) => (
                   <TableRow
-                    key={row.name}
+                    key={item.id}
+                    id={item.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.item}
+                      <p>{item.title}</p>
+                      <img src={item.thumbnail} alt="{item.title}" />
                     </TableCell>
-                    <TableCell align="right">{row.price}</TableCell>
-                    <TableCell align="right">{row.quantity}</TableCell>
-                    <TableCell align="right">{row.total}</TableCell>
+                    <TableCell align="center">
+                      {item.amount ? item.amount : item.price}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 3,
+                          justifyContent: 'center'
+                        }}
+                      >
+                        <Button>
+                          <RemoveIcon />
+                        </Button>
+                        <Typography>{item.quantity}</Typography>
+                        <Button>
+                          <AddIcon />
+                        </Button>
+                      </Box>
+                    </TableCell>
+                    <TableCell align="center">{item.total}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        size="sm"
+                        variant="soft"
+                        onClick={() => {
+                          handleDelete(item.id)
+                        }}
+                      >
+                        <DeleteIcon />
+                        Delete
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
