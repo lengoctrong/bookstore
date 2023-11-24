@@ -2,25 +2,23 @@ import { Box, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import BooksList from '../../components/BooksList'
-import { getAllItems, getItems } from '../../redux/apiRequest'
+import { getAllItems } from '../../redux/apiRequest'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const bookSelector = useSelector((state) => state.book)
-  const { books, isFetching } = bookSelector
-
-  const totalItems = useSelector((state) => state.book.totalItems)
-
-  const dispatch = useDispatch()
+  const { books, isFetching, totalItems } = bookSelector
+  const totalPages = Math.ceil(totalItems / 6)
   const searchValue = useSelector((state) => state.search.searchValue)
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    getAllItems(dispatch, 'pokemon', currentPage)
-  }, [currentPage])
+    getAllItems(dispatch, searchValue, currentPage, totalItems)
+  }, [dispatch, searchValue, currentPage, totalItems])
 
   const handlePageChange = (e, newPage) => {
     setCurrentPage(newPage)
-    getItems(dispatch, searchValue, currentPage, totalItems)
   }
   return (
     <Box
@@ -36,7 +34,7 @@ const Home = () => {
             <Pagination
               size="large"
               onChange={handlePageChange}
-              count={10}
+              count={totalPages}
               page={currentPage}
               variant="outlined"
             />

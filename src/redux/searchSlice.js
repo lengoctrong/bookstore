@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const searchValue =
+  localStorage.getItem('searchValue') !== null
+    ? JSON.parse(localStorage.getItem('searchValue'))
+    : ''
+
 const initialState = {
-  searchValue: ''
+  searchValue: searchValue
 }
 
 const searchSlice = createSlice({
@@ -10,6 +15,8 @@ const searchSlice = createSlice({
   reducers: {
     getSearchValue: (state, action) => {
       state.searchValue = action.payload
+
+      localStorage.setItem('searchValue', JSON.stringify(state.searchValue))
     }
   }
 })

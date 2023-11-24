@@ -1,42 +1,24 @@
 import axios from '../MyAxios'
-import { getAllBooks } from './bookSlice'
+import { getAllBooks, getTotalItems } from './bookSlice'
 import { addItem, decreaseItem, increaseItem, removeItem } from './cartSlice'
+import { getSearchValue } from './searchSlice'
 
-export const getItems = async (
+export const getAllItems = async (
   dispatch,
-  searchValue,
-  currentPage = 1,
-  totalItems = 1
+  searchValue = '',
+  currentPage,
+  totalItems = 0
 ) => {
-  const limit = 10
-  const totalPages = Math.ceil(totalItems / limit)
-  currentPage = Math.max(1, Math.min(currentPage, totalPages))
-  let offset = (currentPage - 1) * limit
-
-  try {
-    const res = await axios.get(
-      `/volumes?q=${searchValue}&startIndex=${offset}&maxResults=${limit}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
-    )
-
-    dispatch(getAllBooks(res.data))
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const getAllItems = async (dispatch, searchValue = '', currentPage) => {
   let offset = 0
   let limit = 6
 
   if (!searchValue) {
-    const characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    const charactersLength = characters.length
-    for (let i = 0; i < length; i++) {
-      searchValue += characters.charAt(
-        Math.floor(Math.random() * charactersLength)
-      )
-    }
+    const list = ['html', 'css', 'javascript', 'reactjs']
+    const listLength = list.length
+    const key = Math.floor(Math.random() * listLength)
+
+    searchValue = list[key]
+    dispatch(getSearchValue(searchValue))
   }
 
   if (currentPage > 1) {
@@ -46,6 +28,10 @@ export const getAllItems = async (dispatch, searchValue = '', currentPage) => {
     const res = await axios.get(
       `/volumes?q=${searchValue}&startIndex=${offset}&maxResults=${limit}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
     )
+
+    if (totalItems == 0) {
+      dispatch(getTotalItems(res.data))
+    }
 
     dispatch(getAllBooks(res.data))
   } catch (error) {
