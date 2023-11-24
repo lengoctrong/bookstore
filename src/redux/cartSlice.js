@@ -17,9 +17,9 @@ const totalAmount =
 
 const initialState = {
   cartItems: cartItems,
-  hasItem: false,
   totalQuantity: totalQuantity,
-  totalAmount: totalAmount
+  totalAmount: totalAmount,
+  hasItem: false
 }
 
 const cartSlice = createSlice({
@@ -79,10 +79,43 @@ const cartSlice = createSlice({
       )
 
       localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+    },
+
+    //increase item
+    decreaseItem: (state, action) => {
+      const id = action.payload
+      const selectedItem = state.cartItems.find((item) => item.id == id)
+
+      if (selectedItem.quantity > 1) {
+        selectedItem.quantity--
+        state.totalQuantity--
+      }
+
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify(state.cartItems.map((item) => item))
+      )
+      localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+    },
+
+    //increase item
+    increaseItem: (state, action) => {
+      const id = action.payload
+      const selectedItem = state.cartItems.find((item) => item.id == id)
+
+      selectedItem.quantity++
+      state.totalQuantity++
+
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify(state.cartItems.map((item) => item))
+      )
+      localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
     }
   }
 })
 
-export const { addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, increaseItem, decreaseItem } =
+  cartSlice.actions
 
 export default cartSlice.reducer

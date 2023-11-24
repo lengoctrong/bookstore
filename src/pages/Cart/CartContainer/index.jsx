@@ -4,7 +4,6 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import {
   Box,
   Button,
-  ButtonGroup,
   Container,
   Table,
   TableBody,
@@ -16,7 +15,11 @@ import {
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import SearchBar from '../../../components/Header/components/SearchBar'
-import { deleteCartItem } from '../../../redux/apiRequest'
+import {
+  decreaseQuantity,
+  deleteCartItem,
+  increaseQuantity
+} from '../../../redux/apiRequest'
 
 const CartContainer = ({ cartItems, totalQuantity }) => {
   const dispatch = useDispatch()
@@ -25,17 +28,26 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
     deleteCartItem(dispatch, id)
   }
 
+  const handleDecrease = (id) => {
+    decreaseQuantity(dispatch, id)
+  }
+
+  const handleIncrease = (id) => {
+    increaseQuantity(dispatch, id)
+  }
+
   return (
     <div className="cart-container">
       <SearchBar />
       <div className="cart-title">
         <Typography variant="h3" sx={{ textAlign: 'center', my: 5 }}>
-          Your Cart ( {totalQuantity} items)
+          Your Cart{' '}
+          {totalQuantity == 0 ? 'is Empty' : `( ${totalQuantity} items)`}
         </Typography>
       </div>
       <div className="cart-content">
         <Container>
-          <TableContainer sx={{ maxHeight: 350 }}>
+          <TableContainer sx={{ maxHeight: 450 }}>
             <Table aria-label="simple table" stickyHeader>
               <TableHead>
                 <TableRow>
@@ -69,11 +81,19 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
                           justifyContent: 'center'
                         }}
                       >
-                        <Button>
-                          <RemoveIcon />
-                        </Button>
+                        {item.quantity == 1 ? (
+                          <>
+                            <Button disabled>
+                              <RemoveIcon />
+                            </Button>
+                          </>
+                        ) : (
+                          <Button onClick={() => handleDecrease(item.id)}>
+                            <RemoveIcon />
+                          </Button>
+                        )}
                         <Typography>{item.quantity}</Typography>
-                        <Button>
+                        <Button onClick={() => handleIncrease(item.id)}>
                           <AddIcon />
                         </Button>
                       </Box>
