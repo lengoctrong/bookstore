@@ -1,6 +1,6 @@
 import axios from '../MyAxios'
 import { getAllBooks } from './bookSlice'
-import { addItem, removeItem } from './cartSlice'
+import { addItem, decreaseItem, increaseItem, removeItem } from './cartSlice'
 
 export const getItems = async (
   dispatch,
@@ -64,4 +64,11 @@ export const addToCart = async (dispatch, id) => {
 
 export const deleteCartItem = (dispatch, id) => {
   dispatch(removeItem(id))
+}
+
+export const decreaseQuantity = (dispatch, id) => {
+  dispatch(decreaseItem(id))
+}
+export const increaseQuantity = (dispatch, id) => {
+  dispatch(increaseItem(id))
 }
