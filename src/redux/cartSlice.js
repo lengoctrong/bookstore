@@ -26,22 +26,52 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // addItem
+    // add item
     addItem: (state, action) => {
       const newItem = action.payload
 
-      state.cartItems.push({
-        id: newItem.id,
-        volumeInfo: newItem.volumeInfo,
-        saleInfo: newItem.saleInfo,
-        title: newItem.volumeInfo.title,
-        subtitle: newItem.volumeInfo.subtitle,
-        thumbnail: newItem.volumeInfo.imageLinks.thumbnail,
-        amount: newItem.saleInfo.listPrice?.amount,
-        currencyCode: newItem.saleInfo.listPrice?.currencyCode
-      })
+      const existingItem = state.cartItems.find((item) => item.id == newItem.id)
+
+      if (!existingItem) {
+        state.cartItems.push({
+          id: newItem.id,
+          title: newItem.volumeInfo.title,
+          subtitle: newItem.volumeInfo.subtitle,
+          thumbnail: newItem.volumeInfo.imageLinks.thumbnail,
+          amount: newItem.saleInfo.listPrice?.amount,
+          price: 250000,
+          quantity: 1,
+          currencyCode: newItem.saleInfo.listPrice?.currencyCode,
+          saleInfo: newItem.saleInfo,
+          volumeInfo: newItem.volumeInfo
+        })
+        state.totalQuantity++
+      } else {
+        state.totalQuantity++
+        existingItem.quantity++
+      }
+
       state.hasItem = true
-      state.totalQuantity++
+
+      localStorage.setItem(
+        'cartItems',
+        JSON.stringify(state.cartItems.map((item) => item))
+      )
+
+      localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+    },
+
+    //remove item
+    removeItem: (state, action) => {
+      const id = action.payload
+
+      const deletedItem = state.cartItems.find((item) => item.id == id)
+
+      const deletedItemQuantity = deletedItem.quantity
+
+      state.totalQuantity -= deletedItemQuantity
+
+      state.cartItems = state.cartItems.filter((item) => item != deletedItem)
 
       localStorage.setItem(
         'cartItems',
@@ -53,6 +83,6 @@ const cartSlice = createSlice({
   }
 })
 
-export const { addItem } = cartSlice.actions
+export const { addItem, removeItem } = cartSlice.actions
 
 export default cartSlice.reducer

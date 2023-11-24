@@ -1,6 +1,6 @@
 import axios from '../MyAxios'
 import { getAllBooks } from './bookSlice'
-import { addItem } from './cartSlice'
+import { addItem, removeItem } from './cartSlice'
 
 export const getItems = async (
   dispatch,
@@ -19,15 +19,6 @@ export const getItems = async (
     )
 
     dispatch(getAllBooks(res.data))
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const addToCard = async (dispatch, id) => {
-  try {
-    const res = await axios.get(`/volumes/${id}`)
-    dispatch(addItem(res.data))
   } catch (error) {
     console.log(error)
   }
@@ -60,4 +51,17 @@ export const getAllItems = async (dispatch, searchValue = '', currentPage) => {
   } catch (error) {
     console.log(error)
   }
+}
+
+export const addToCart = async (dispatch, id) => {
+  try {
+    const res = await axios.get(`/volumes/${id}`)
+    dispatch(addItem(res.data))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteCartItem = (dispatch, id) => {
+  dispatch(removeItem(id))
 }

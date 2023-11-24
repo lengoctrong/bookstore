@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { addToCard } from '../../redux/apiRequest'
+import { addToCart } from '../../redux/apiRequest'
 
 function BookItem({ book }) {
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ function BookItem({ book }) {
   const { listPrice } = saleInfo
 
   const handleAddClick = () => {
-    addToCard(dispatch, book.id)
+    addToCart(dispatch, book.id)
   }
 
   return (
