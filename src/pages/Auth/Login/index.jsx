@@ -1,3 +1,4 @@
+import GoogleIcon from '@mui/icons-material/Google'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
@@ -6,22 +7,49 @@ import Checkbox from '@mui/material/Checkbox'
 import Container from '@mui/material/Container'
 import CssBaseline from '@mui/material/CssBaseline'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
-import { NavLink } from 'react-router-dom'
 
+import { useGoogleLogin } from '@react-oauth/google'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { loginUser } from '../../../redux/apiRequest'
 const defaultTheme = createTheme()
 
 const Login = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const login = useGoogleLogin({
+    onSuccess: async (res) => {
+      const accessToken = res.access_token
+      try {
+        loginUser(dispatch, navigate, accessToken)
+        // const res = await axios.get(
+        //   'https://www.googleapis.com/oauth2/v3/userinfo',
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${accessToken}`
+        //     }
+        //   }
+        // )
+
+        // localStorage.setItem('user', JSON.stringify(res.data))
+        // navigate('/')
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  })
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
+    // const data = new FormData(event.currentTarget)
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password')
+    // })
   }
 
   return (
@@ -80,18 +108,17 @@ const Login = () => {
             >
               Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <NavLink href="#" variant="body2">
-                  Forgot password?
-                </NavLink>
-              </Grid>
-              <Grid item>
-                <NavLink to="/" variant="body2">
-                  <Button>Return to home page</Button>
-                </NavLink>
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'flex', justifyContent: 'center', my: 1 }}>
+              <Typography variant="h6">OR</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                onClick={() => login()}
+                style={{ display: 'flex', gap: 1, alignItems: 'center' }}
+              >
+                Login with Google <GoogleIcon />
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Container>

@@ -2,6 +2,7 @@ import axios from '../MyAxios'
 import { getAllBooks, getTotalItems } from './bookSlice'
 import { addItem, decreaseItem, increaseItem, removeItem } from './cartSlice'
 import { getSearchValue } from './searchSlice'
+import { addUser } from './userSlice'
 
 export const getAllItems = async (
   dispatch,
@@ -57,4 +58,21 @@ export const decreaseQuantity = (dispatch, id) => {
 }
 export const increaseQuantity = (dispatch, id) => {
   dispatch(increaseItem(id))
+}
+
+export const loginUser = async (dispatch, navigate, accessToken) => {
+  try {
+    const res = await axios.get(
+      'https://www.googleapis.com/oauth2/v3/userinfo',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    )
+    dispatch(addUser(res.data))
+    navigate('/')
+  } catch (err) {
+    console.log(err)
+  }
 }
