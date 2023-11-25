@@ -10,14 +10,12 @@ function ModeToggle() {
       }}
     >
       {mode === 'light' ? (
-        <Box
-          sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'black' }}
-        >
-          <DarkModeIcon /> Dark
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <DarkModeIcon /> <p>Dark</p>
         </Box>
       ) : (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          <LightModeIcon /> Light
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <LightModeIcon /> <p>Light</p>
         </Box>
       )}
     </Button>
