@@ -14,6 +14,7 @@ import {
   Typography
 } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import SearchBar from '../../../components/Header/components/SearchBar'
 import {
   decreaseQuantity,
@@ -125,6 +126,19 @@ const CartContainer = () => {
           <div className="cart-total">
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 10 }}>
               <Typography variant="h4">Total: {totalAmount}</Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                my: 10
+              }}
+            >
+              <Button variant="contained" size="large">
+                <NavLink to="/checkout" style={{ color: 'white' }}>
+                  Checkout
+                </NavLink>
+              </Button>
             </Box>
           </div>
         </Container>
