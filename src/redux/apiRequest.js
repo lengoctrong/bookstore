@@ -76,3 +76,8 @@ export const loginUser = async (dispatch, navigate, accessToken) => {
     console.log(err)
   }
 }
+
+export const logoutUser = (navigate) => {
+  localStorage.removeItem('user')
+  navigate('/login')
+}

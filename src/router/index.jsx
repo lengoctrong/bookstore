@@ -8,6 +8,7 @@ import Checkout from '../pages/Checkout'
 import Detail from '../pages/Detail'
 import Home from '../pages/Home'
 import Layout from '../pages/Layout'
+import Profile from '../pages/Profile'
 import Shop from '../pages/Shop'
 
 const router = createBrowserRouter([
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <Checkout />
+      },
+      {
+        path: '/profile',
+        element: (
+          <PrivateRouter>
+            <Profile />
+          </PrivateRouter>
+        )
       }
     ]
   },
