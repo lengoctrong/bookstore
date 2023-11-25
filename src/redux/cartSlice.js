@@ -41,14 +41,14 @@ const cartSlice = createSlice({
           subtitle: newItem.volumeInfo.subtitle,
           thumbnail: newItem.volumeInfo.imageLinks.thumbnail,
           amount: newItem.saleInfo.listPrice?.amount,
-          price: 250000,
+          price: 0,
           quantity: 1,
           currencyCode: newItem.saleInfo.listPrice?.currencyCode,
           saleInfo: newItem.saleInfo,
           volumeInfo: newItem.volumeInfo
         })
         state.totalQuantity++
-      } else {
+      } else if (existingItem.amount) {
         state.totalQuantity++
         existingItem.quantity++
       }

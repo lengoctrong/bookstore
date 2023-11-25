@@ -98,9 +98,15 @@ const CartContainer = () => {
                           </Button>
                         )}
                         <Typography>{item.quantity}</Typography>
-                        <Button onClick={() => handleIncrease(item.id)}>
-                          <AddIcon />
-                        </Button>
+                        {item.amount ? (
+                          <Button onClick={() => handleIncrease(item.id)}>
+                            <AddIcon />
+                          </Button>
+                        ) : (
+                          <Button disabled>
+                            <AddIcon />
+                          </Button>
+                        )}
                       </Box>
                     </TableCell>
                     <TableCell align="center">
