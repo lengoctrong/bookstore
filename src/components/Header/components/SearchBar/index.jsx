@@ -20,7 +20,13 @@ import ModeToggle from '../ModeToggle'
 const SearchBar = () => {
   const theme = useTheme()
   const textColor = theme.palette.text.primary
+
   const [isLogin, setIsLogin] = useState(false)
+
+  const userSelector = useSelector((state) => state.user)
+
+  const { user } = userSelector
+
   const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
 
@@ -102,7 +108,10 @@ const SearchBar = () => {
                 to={isLogin ? '/' : '/login'}
               >
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                  <p>Hello, {isLogin ? 'name' : 'sign in'}</p>
+                  <p>
+                    Hello,{' '}
+                    {user && user.given_name ? user.given_name : 'sign in'}
+                  </p>
                 </Box>
               </NavLink>
             </Button>

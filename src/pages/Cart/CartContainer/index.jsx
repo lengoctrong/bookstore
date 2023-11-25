@@ -13,7 +13,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from '../../../components/Header/components/SearchBar'
 import {
   decreaseQuantity,
@@ -21,7 +21,11 @@ import {
   increaseQuantity
 } from '../../../redux/apiRequest'
 
-const CartContainer = ({ cartItems, totalQuantity }) => {
+const CartContainer = () => {
+  const cartSelector = useSelector((state) => state.cart)
+
+  const { cartItems, totalQuantity, totalAmount } = cartSelector
+
   const dispatch = useDispatch()
 
   const handleDelete = (id) => {
@@ -45,7 +49,7 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
           {totalQuantity == 0 ? 'is Empty' : `( ${totalQuantity} items)`}
         </Typography>
       </div>
-      <div className="cart-content">
+      <div className="cart-product">
         <Container>
           <TableContainer sx={{ maxHeight: 450 }}>
             <Table aria-label="simple table" stickyHeader>
@@ -98,7 +102,9 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
                         </Button>
                       </Box>
                     </TableCell>
-                    <TableCell align="center">{item.total}</TableCell>
+                    <TableCell align="center">
+                      {(item.amount ? item.amount : item.price) * item.quantity}
+                    </TableCell>
                     <TableCell align="right">
                       <Button
                         size="sm"
@@ -116,6 +122,11 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
               </TableBody>
             </Table>
           </TableContainer>
+          <div className="cart-total">
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 10 }}>
+              <Typography variant="h4">Total: {totalAmount}</Typography>
+            </Box>
+          </div>
         </Container>
       </div>
     </div>
