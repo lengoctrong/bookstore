@@ -28,6 +28,8 @@ const cartSlice = createSlice({
   reducers: {
     // add item
     addItem: (state, action) => {
+      state.hasItem = true
+
       const newItem = action.payload
 
       const existingItem = state.cartItems.find((item) => item.id == newItem.id)
@@ -51,14 +53,17 @@ const cartSlice = createSlice({
         existingItem.quantity++
       }
 
-      state.hasItem = true
+      state.totalAmount = state.cartItems.reduce((total, item) => {
+        const price = item.amount ? item.amount : item.price
+        return (total += price * item.quantity)
+      }, 0)
 
       localStorage.setItem(
         'cartItems',
         JSON.stringify(state.cartItems.map((item) => item))
       )
-
       localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+      localStorage.setItem('totalAmount', JSON.stringify(state.totalAmount))
     },
 
     //remove item
@@ -66,6 +71,10 @@ const cartSlice = createSlice({
       const id = action.payload
 
       const deletedItem = state.cartItems.find((item) => item.id == id)
+
+      const price = deletedItem.amount ? deletedItem.amount : deletedItem.price
+
+      state.totalAmount -= price * deletedItem.quantity
 
       const deletedItemQuantity = deletedItem.quantity
 
@@ -79,14 +88,20 @@ const cartSlice = createSlice({
       )
 
       localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+      localStorage.setItem('totalAmount', JSON.stringify(state.totalAmount))
     },
 
-    //increase item
+    //decrease item
     decreaseItem: (state, action) => {
       const id = action.payload
       const selectedItem = state.cartItems.find((item) => item.id == id)
 
+      const price = selectedItem.amount
+        ? selectedItem.amount
+        : selectedItem.price
+
       if (selectedItem.quantity > 1) {
+        state.totalAmount -= price
         selectedItem.quantity--
         state.totalQuantity--
       }
@@ -96,12 +111,19 @@ const cartSlice = createSlice({
         JSON.stringify(state.cartItems.map((item) => item))
       )
       localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+      localStorage.setItem('totalAmount', JSON.stringify(state.totalAmount))
     },
 
     //increase item
     increaseItem: (state, action) => {
       const id = action.payload
       const selectedItem = state.cartItems.find((item) => item.id == id)
+
+      const price = selectedItem.amount
+        ? selectedItem.amount
+        : selectedItem.price
+
+      state.totalAmount += price
 
       selectedItem.quantity++
       state.totalQuantity++
@@ -111,6 +133,7 @@ const cartSlice = createSlice({
         JSON.stringify(state.cartItems.map((item) => item))
       )
       localStorage.setItem('totalQuantity', JSON.stringify(state.totalQuantity))
+      localStorage.setItem('totalAmount', JSON.stringify(state.totalAmount))
     }
   }
 })

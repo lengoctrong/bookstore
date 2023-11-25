@@ -13,7 +13,7 @@ import {
   TableRow,
   Typography
 } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from '../../../components/Header/components/SearchBar'
 import {
   decreaseQuantity,
@@ -21,7 +21,11 @@ import {
   increaseQuantity
 } from '../../../redux/apiRequest'
 
-const CartContainer = ({ cartItems, totalQuantity }) => {
+const CartContainer = () => {
+  const cartSelector = useSelector((state) => state.cart)
+
+  const { cartItems, totalQuantity, totalAmount } = cartSelector
+
   const dispatch = useDispatch()
 
   const handleDelete = (id) => {
@@ -120,7 +124,7 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
           </TableContainer>
           <div className="cart-total">
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 10 }}>
-              <Typography variant="h4">Total: 1000</Typography>
+              <Typography variant="h4">Total: {totalAmount}</Typography>
             </Box>
           </div>
         </Container>
