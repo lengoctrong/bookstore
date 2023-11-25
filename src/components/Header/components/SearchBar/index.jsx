@@ -20,6 +20,7 @@ import ModeToggle from '../ModeToggle'
 const SearchBar = () => {
   const theme = useTheme()
   const textColor = theme.palette.text.primary
+
   const [isLogin, setIsLogin] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
