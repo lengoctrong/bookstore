@@ -7,6 +7,17 @@ const user =
 
 const initialState = {
   user: user
+  // user: {
+  //   email: user.email,
+  //   email_verified: user.email_verified,
+  //   family_name: user.family_name,
+  //   given_name: user.given_name,
+  //   hd: user.hd,
+  //   locale: user.locale,
+  //   name: user.name,
+  //   picture: user.picture,
+  //   sub: user.sub
+  // }
 }
 
 const userSlice = createSlice({

@@ -45,7 +45,7 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
           {totalQuantity == 0 ? 'is Empty' : `( ${totalQuantity} items)`}
         </Typography>
       </div>
-      <div className="cart-content">
+      <div className="cart-product">
         <Container>
           <TableContainer sx={{ maxHeight: 450 }}>
             <Table aria-label="simple table" stickyHeader>
@@ -98,7 +98,9 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
                         </Button>
                       </Box>
                     </TableCell>
-                    <TableCell align="center">{item.total}</TableCell>
+                    <TableCell align="center">
+                      {(item.amount ? item.amount : item.price) * item.quantity}
+                    </TableCell>
                     <TableCell align="right">
                       <Button
                         size="sm"
@@ -116,6 +118,11 @@ const CartContainer = ({ cartItems, totalQuantity }) => {
               </TableBody>
             </Table>
           </TableContainer>
+          <div className="cart-total">
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', my: 10 }}>
+              <Typography variant="h4">Total: 1000</Typography>
+            </Box>
+          </div>
         </Container>
       </div>
     </div>
