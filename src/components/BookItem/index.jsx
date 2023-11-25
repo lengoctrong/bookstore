@@ -43,7 +43,7 @@ function BookItem({ book }) {
           saleInfo.listPrice.amount &&
           saleInfo.listPrice.currencyCode
             ? `Price: ${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`
-            : 'Price: 250000 VND'}
+            : 'Price: 0 VND'}
         </Typography>
       </CardContent>
 
