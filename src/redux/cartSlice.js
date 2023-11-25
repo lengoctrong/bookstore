@@ -48,7 +48,7 @@ const cartSlice = createSlice({
           volumeInfo: newItem.volumeInfo
         })
         state.totalQuantity++
-      } else {
+      } else if (existingItem.amount) {
         state.totalQuantity++
         existingItem.quantity++
       }
