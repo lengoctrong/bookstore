@@ -4,13 +4,13 @@ import PrivateRouter from './PrivateRouter'
 import Login from '../pages/Auth/Login'
 import Signup from '../pages/Auth/Signup'
 import Cart from '../pages/Cart'
+import Categories from '../pages/Categories'
 import Checkout from '../pages/Checkout'
 import Detail from '../pages/Detail'
 import Home from '../pages/Home'
 import Layout from '../pages/Layout'
 import Profile from '../pages/Profile'
 import Shop from '../pages/Shop'
-
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -42,6 +42,10 @@ const router = createBrowserRouter([
             <Profile />
           </PrivateRouter>
         )
+      },
+      {
+        path: '/categories',
+        element: <Categories />
       }
     ]
   },
