@@ -102,14 +102,7 @@ const SearchBar = () => {
                 to={isLogin ? '/' : '/login'}
               >
                 <Box sx={{ display: 'flex', gap: 1 }}>
-                  {isLogin ? (
-                    <>
-                      <AccountCircleIcon />
-                      <p>Account</p>
-                    </>
-                  ) : (
-                    <p>Hello, sign in</p>
-                  )}
+                  <p>Hello, {isLogin ? 'name' : 'sign in'}</p>
                 </Box>
               </NavLink>
             </Button>
