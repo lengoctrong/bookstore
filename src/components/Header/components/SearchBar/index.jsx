@@ -1,3 +1,5 @@
+import { useTheme } from '@emotion/react'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import {
@@ -16,6 +18,9 @@ import { getSearchValue } from '../../../../redux/searchSlice'
 import ModeToggle from '../ModeToggle'
 
 const SearchBar = () => {
+  const theme = useTheme()
+  const textColor = theme.palette.text.primary
+  const [isLogin, setIsLogin] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const dispatch = useDispatch()
 
@@ -41,6 +46,7 @@ const SearchBar = () => {
             <NavLink to="/">L O G O</NavLink>
           </Tooltip>
         </div>
+        <Box sx={{ display: 'flex', flexGrow: 1 }}></Box>
         <div className="search">
           <Box
             sx={{
@@ -80,6 +86,35 @@ const SearchBar = () => {
             </Box>
           </Box>
         </div>
+        <Box sx={{ display: 'flex', flexGrow: 1 }}></Box>
+        <div className="account">
+          <Box
+            sx={{
+              display: 'flex',
+              gap: 1,
+              fontSize: '1.2rem',
+              alignItems: 'center'
+            }}
+          >
+            <Button>
+              <NavLink
+                style={{ color: textColor }}
+                to={isLogin ? '/' : '/login'}
+              >
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  {isLogin ? (
+                    <>
+                      <AccountCircleIcon />
+                      <p>Account</p>
+                    </>
+                  ) : (
+                    <p>Hello, sign in</p>
+                  )}
+                </Box>
+              </NavLink>
+            </Button>
+          </Box>
+        </div>
         <div className="cart">
           <Box
             sx={{
@@ -91,10 +126,12 @@ const SearchBar = () => {
           >
             <NavLink to="/cart">
               <Button>
-                Cart
-                <Badge badgeContent={count} color="primary">
-                  <ShoppingCartIcon color="action" />
-                </Badge>
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  <Badge badgeContent={count} color="primary">
+                    <ShoppingCartIcon color="action" />
+                  </Badge>
+                  <p>Cart</p>
+                </Box>
               </Button>
             </NavLink>
             <ModeToggle />
