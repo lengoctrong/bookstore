@@ -13,17 +13,13 @@ const Navbar = () => {
         color: 'white'
       }}
     >
-      <div></div>
       <nav className="navigation">
-        <Box sx={{ display: 'flex', gap: 5 }}>
+        <Box sx={{ display: 'flex', gap: 5, justifyContent: 'center' }}>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/categories">Categories</NavLink>
-          <NavLink to="/news">News</NavLink>
-          <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact </NavLink>
         </Box>
       </nav>
-      <div></div>
     </Box>
   )
 }

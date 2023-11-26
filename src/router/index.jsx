@@ -7,9 +7,16 @@ import Contact from '../pages/Contact'
 import Detail from '../pages/Detail'
 import Home from '../pages/Home'
 import Layout from '../pages/Layout'
+import NotFound from '../pages/NotFound'
 import Profile from '../pages/Profile'
 import PrivateRouter from './PrivateRouter'
 const router = createBrowserRouter([
+  // 404 not found
+  {
+    path: '*',
+    element: <NotFound />
+  },
+
   {
     element: <Layout />,
     children: [
