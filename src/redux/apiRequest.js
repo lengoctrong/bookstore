@@ -1,5 +1,5 @@
 import axios from '../MyAxios'
-import { getAllBooks, getTotalItems } from './bookSlice'
+import { getAllBooks, getFilterItems, getTotalItems } from './bookSlice'
 import { addItem, decreaseItem, increaseItem, removeItem } from './cartSlice'
 import { getSearchValue } from './searchSlice'
 import { addUser } from './userSlice'
@@ -77,7 +77,17 @@ export const loginUser = async (dispatch, navigate, accessToken) => {
   }
 }
 
-export const logoutUser = (navigate) => {
-  localStorage.removeItem('user')
-  navigate('/login')
+export const getByCategory = async (
+  dispatch,
+  searchValue,
+  category = 'paid-ebooks'
+) => {
+  try {
+    const res = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&filter=${category}&key=AIzaSyAJFZtPiNSb8u_Z-2Wfe-pwmAHa5_hrPAQ`
+    )
+    dispatch(getFilterItems(res.data.items))
+  } catch (error) {
+    console.log(error)
+  }
 }

@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 
 import { useGoogleLogin } from '@react-oauth/google'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { loginUser } from '../../../redux/apiRequest'
 const defaultTheme = createTheme()
 
@@ -96,10 +96,20 @@ const Login = () => {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}
+            >
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <NavLink to="/">Go back</NavLink>
+            </Box>
             <Button
               type="submit"
               fullWidth
