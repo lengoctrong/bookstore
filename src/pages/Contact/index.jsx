@@ -16,10 +16,11 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text)
+          alert(result.text)
+          e.target.reset()
         },
         (error) => {
-          console.log(error.text)
+          alert(error.text)
         }
       )
   }
