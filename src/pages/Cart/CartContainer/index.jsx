@@ -46,8 +46,8 @@ const CartContainer = () => {
       <SearchBar />
       <div className="cart-title">
         <Typography variant="h3" sx={{ textAlign: 'center', my: 5 }}>
-          Your Cart{' '}
-          {totalQuantity == 0 ? 'is Empty' : `( ${totalQuantity} items)`}
+          Your Cart {totalQuantity == 0 ? 'is Empty' : `(${totalQuantity}`}
+          {totalQuantity == 1 ? ' volume)' : ' volumes)'}
         </Typography>
       </div>
       <div className="cart-product">
