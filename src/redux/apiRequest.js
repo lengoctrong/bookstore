@@ -1,5 +1,10 @@
 import axios from '../MyAxios'
-import { getAllBooks, getFilterItems, getTotalItems } from './bookSlice'
+import {
+  addDetailItem,
+  getAllBooks,
+  getFilterItems,
+  getTotalItems
+} from './bookSlice'
 import { addItem, decreaseItem, increaseItem, removeItem } from './cartSlice'
 import { getSearchValue } from './searchSlice'
 import { addUser } from './userSlice'
@@ -90,4 +95,8 @@ export const getByCategory = async (
   } catch (error) {
     console.log(error)
   }
+}
+
+export const viewDetailItem = (dispatch, id) => {
+  dispatch(addDetailItem(id))
 }

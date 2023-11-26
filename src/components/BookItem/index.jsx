@@ -9,18 +9,23 @@ import CardMedia from '@mui/material/CardMedia'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { addToCart } from '../../redux/apiRequest'
+import { useNavigate } from 'react-router-dom'
+import { addToCart, viewDetailItem } from '../../redux/apiRequest'
 
 function BookItem({ book }) {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const { volumeInfo, saleInfo } = book
 
   const { listPrice } = saleInfo
 
   const handleAddClick = () => {
     addToCart(dispatch, book.id)
+  }
+
+  const handleDetailCLick = () => {
+    viewDetailItem(dispatch, book.id)
+    navigate(`/detail?id=${book.id}`)
   }
 
   return (
@@ -43,9 +48,7 @@ function BookItem({ book }) {
           saleInfo.listPrice.amount &&
           saleInfo.listPrice.currencyCode
             ? `Price: ${saleInfo.listPrice.amount} ${saleInfo.listPrice.currencyCode}`
-
             : 'Price: Free'}
-
         </Typography>
       </CardContent>
 
@@ -55,11 +58,9 @@ function BookItem({ book }) {
           <Typography>Add to cart</Typography>
         </IconButton>
         <Box sx={{ flexGrow: 1 }}></Box>
-        <IconButton aria-label="info">
+        <IconButton onClick={handleDetailCLick}>
           <InfoIcon />
-          <NavLink to="/detail">
-            <Typography>Detail</Typography>
-          </NavLink>
+          <Typography>Detail</Typography>
         </IconButton>
       </CardActions>
     </Card>
