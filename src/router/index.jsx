@@ -1,8 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import PrivateRouter from './PrivateRouter'
-
 import Login from '../pages/Auth/Login'
-import Signup from '../pages/Auth/Signup'
 import Cart from '../pages/Cart'
 import Categories from '../pages/Categories'
 import Checkout from '../pages/Checkout'
@@ -11,6 +8,7 @@ import Home from '../pages/Home'
 import Layout from '../pages/Layout'
 import Profile from '../pages/Profile'
 import Shop from '../pages/Shop'
+import PrivateRouter from './PrivateRouter'
 const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -52,21 +50,12 @@ const router = createBrowserRouter([
   // cart
   {
     path: '/cart',
-    element: (
-      <PrivateRouter>
-        <Cart />
-      </PrivateRouter>
-    )
+    element: <Cart />
   },
   // login
   {
     path: 'login',
     element: <Login />
-  },
-  // signup
-  {
-    path: 'signup',
-    element: <Signup />
   }
 ])
 

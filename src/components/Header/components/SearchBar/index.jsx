@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { getAllItems, logoutUser } from '../../../../redux/apiRequest'
+import { getAllItems } from '../../../../redux/apiRequest'
 import { getSearchValue } from '../../../../redux/searchSlice'
 import ModeToggle from '../ModeToggle'
 
@@ -162,7 +162,8 @@ const SearchBar = () => {
                 <Divider />
                 <MenuItem
                   onClick={() => {
-                    logoutUser(navigate)
+                    localStorage.removeItem('user')
+                    location.reload()
                   }}
                 >
                   <Box

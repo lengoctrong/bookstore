@@ -1,8 +1,9 @@
-import { Box, Pagination } from '@mui/material'
+import { Box, Button, Pagination } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import BooksList from '../../components/BooksList'
-import { getAllItems } from '../../redux/apiRequest'
+import { getAllItems, getByCategory } from '../../redux/apiRequest'
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -10,6 +11,7 @@ const Home = () => {
   const { books, isFetching, totalItems } = bookSelector
   const totalPages = Math.ceil(totalItems / 6)
   const searchValue = useSelector((state) => state.search.searchValue)
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -20,6 +22,13 @@ const Home = () => {
   const handlePageChange = (e, newPage) => {
     setCurrentPage(newPage)
   }
+
+  const handleFilterByCate = (e) => {
+    const category = e.target.value
+    getByCategory(dispatch, searchValue, category)
+    navigate(`/categories?category=${category}`)
+  }
+
   return (
     <Box
       sx={{
@@ -27,6 +36,22 @@ const Home = () => {
           `calc(100vh - ${theme.bookstore.searchBarHeight} - ${theme.bookstore.navBarHeight})`
       }}
     >
+      <Box sx={{ display: 'flex', my: 2, gap: 2 }}>
+        <Button
+          value="free-ebooks"
+          variant="contained"
+          onClick={handleFilterByCate}
+        >
+          Free ebooks
+        </Button>
+        <Button
+          value="paid-ebooks"
+          variant="contained"
+          onClick={handleFilterByCate}
+        >
+          Paid ebooks
+        </Button>
+      </Box>
       <BooksList books={books} />
       {isFetching && (
         <>

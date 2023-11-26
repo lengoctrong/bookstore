@@ -8,6 +8,7 @@ const totalItems =
 const initialState = {
   books: [],
   totalItems: totalItems,
+  booksByCategory: [],
   isFetching: false
 }
 
@@ -23,10 +24,13 @@ const bookSlice = createSlice({
       state.totalItems = action.payload.totalItems
 
       localStorage.setItem('totalItems', JSON.stringify(state.totalItems))
+    },
+    getFilterItems: (state, action) => {
+      state.booksByCategory = action.payload
     }
   }
 })
 
-export const { getAllBooks, getTotalItems } = bookSlice.actions
+export const { getAllBooks, getTotalItems, getFilterItems } = bookSlice.actions
 
 export default bookSlice.reducer
