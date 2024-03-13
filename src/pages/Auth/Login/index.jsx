@@ -24,17 +24,6 @@ const Login = () => {
       const accessToken = res.access_token
       try {
         loginUser(dispatch, navigate, accessToken)
-        // const res = await axios.get(
-        //   'https://www.googleapis.com/oauth2/v3/userinfo',
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${accessToken}`
-        //     }
-        //   }
-        // )
-
-        // localStorage.setItem('user', JSON.stringify(res.data))
-        // navigate('/')
       } catch (err) {
         console.log(err)
       }

@@ -10,8 +10,7 @@ import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addToCart, viewDetailItem } from '../../redux/apiRequest'
-
+import { addToCart, viewDetailItem } from '~/redux/apiRequest'
 function BookItem({ book }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
