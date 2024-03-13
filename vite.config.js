@@ -12,7 +12,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['@mui/icons-material']
+      external: ['@mui/icons-material/DarkModeOutLined']
     }
   }
 })
